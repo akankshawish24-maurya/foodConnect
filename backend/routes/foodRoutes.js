@@ -20,7 +20,8 @@ const {
   createFood,
    getMyFoodListings,
      deleteFood,
-      updateFood
+      updateFood,
+      getAvailableFood
 } = require("../controllers/foodController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -35,14 +36,25 @@ router.get(
   authMiddleware,
   getMyFoodListings
 );
-router.delete(
-  "/:id",
+router.get(
+  "/available",
   authMiddleware,
-  deleteFood
+  getAvailableFood
 );
+
 router.put(
   "/:id",
   authMiddleware,
   updateFood
 );
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  deleteFood
+);
+router.get("/test", (req, res) => {
+  res.send("FOOD ROUTES ARE WORKING");
+});
+
 module.exports = router;

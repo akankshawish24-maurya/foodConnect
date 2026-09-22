@@ -53,25 +53,32 @@ const dns = require("dns");
 dns.setServers(["8.8.8.8"]);
 
 const express = require("express");
+
 const dotenv = require("dotenv");
 const cors = require("cors");
-
 dotenv.config();
+
 
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const foodRoutes = require("./routes/foodRoutes");
+const claimRoutes = require("./routes/claimRoutes");
+const pickupRoutes = require("./routes/pickupRoutes");
+
 
 const app = express();
 app.use(cors());
-
 app.use(express.json());
+
+
 
 connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/food", foodRoutes);
+app.use("/api/claims", claimRoutes);
+app.use("/api/pickups", pickupRoutes);
 
 app.get("/", (req, res) => {
   res.send("FoodConnect Backend is Running!");

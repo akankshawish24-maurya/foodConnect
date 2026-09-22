@@ -201,10 +201,31 @@ const updateFood = async (req, res) => {
     });
   }
 };
+const getAvailableFood = async (req, res) => {
+  try {
+    const foods = await FoodListing.find({
+      status: "AVAILABLE"
+    }).sort({ createdAt: -1 });
+
+    console.log("AVAILABLE FOOD COUNT:", foods.length);
+    console.log("AVAILABLE FOODS:", foods);
+
+    res.status(200).json(foods);
+
+  } catch (error) {
+    console.error("Get available food error:", error);
+
+    res.status(500).json({
+      message: "Failed to get available food"
+    });
+  }
+};
+
 
 module.exports = {
   createFood,
    getMyFoodListings,
     deleteFood,
-    updateFood
+    updateFood,
+     getAvailableFood
 };

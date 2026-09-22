@@ -61,7 +61,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AddFood from "./pages/AddFood";
 import MyListings from "./pages/MyListings";
 import EditFood from "./pages/EditFood";
-
+import AvailableFood from "./pages/AvailableFood";
 function App() {
   return (
     <BrowserRouter>
@@ -101,10 +101,14 @@ function App() {
           element={<MyListings />}
         />
         <Route
-  path="/donor/edit-food/:id"
-  element={<EditFood />}
-/>
-  
+          path="/donor/edit-food/:id"
+          element={<EditFood />}
+        />
+        <Route
+          path="/receiver/available-food"
+          element={<AvailableFood />}
+        />
+        
 
       </Routes>
     </BrowserRouter>
