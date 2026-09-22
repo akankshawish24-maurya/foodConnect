@@ -1389,3 +1389,31 @@ button {
     grid-template-columns: 1fr;
   }
 }
+/* =================================
+   FOOD URGENCY STYLES
+================================= */
+
+.urgency-normal {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.urgency-soon {
+  color: #f9a825;
+  font-weight: 700;
+}
+
+.urgency-urgent {
+  color: #ef6c00;
+  font-weight: 700;
+}
+
+.urgency-critical {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.urgency-expired {
+  color: #616161;
+  font-weight: 700;
+}

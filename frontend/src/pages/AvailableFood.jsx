@@ -159,6 +159,15 @@ function AvailableFood() {
               <strong>Status:</strong>{" "}
               {food.status}
             </p>
+            <p>
+              <strong>Urgency:</strong>{" "}
+              {food.urgencyLabel}
+            </p>
+
+            <p>
+              <strong>Time Remaining:</strong>{" "}
+              {food.minutesRemaining} minutes
+            </p>
 
             <button
               onClick={() =>

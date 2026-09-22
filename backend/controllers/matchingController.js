@@ -3,6 +3,9 @@ const FoodListing = require("../models/FoodListing");
 const {
   calculateMatchScore
 } = require("../utils/matching");
+const {
+  calculateUrgency
+} = require("../utils/urgency");
 
 
 // ==========================================
@@ -11,6 +14,20 @@ const {
 
 const getSmartMatches = async (req, res) => {
   try {
+    // Automatically mark expired food
+    await FoodListing.updateMany(
+      {
+        status: "AVAILABLE",
+        availableUntil: {
+          $lte: new Date()
+        }
+      },
+      {
+        $set: {
+          status: "EXPIRED"
+        }
+      }
+    );
 
     // ------------------------------------------
     // Get receiver requirements
@@ -54,7 +71,7 @@ const getSmartMatches = async (req, res) => {
       const foodTypeMatch =
         foodType
           ? food.foodType.toLowerCase() ===
-            foodType.toLowerCase()
+          foodType.toLowerCase()
           : true;
 
 
@@ -72,6 +89,9 @@ const getSmartMatches = async (req, res) => {
         availableUntil:
           food.availableUntil
       });
+      const urgency = calculateUrgency(
+        food.availableUntil
+      );
 
 
       return {
@@ -92,6 +112,15 @@ const getSmartMatches = async (req, res) => {
           food.availableUntil,
 
         status: food.status,
+        urgencyLevel:
+          urgency.level,
+
+        urgencyLabel:
+          urgency.label,
+
+        minutesRemaining:
+          urgency.minutesRemaining,
+
 
         matchScore: score
       };

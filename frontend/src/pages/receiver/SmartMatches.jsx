@@ -101,6 +101,27 @@ function SmartMatches() {
 
         return "low-match";
     };
+    const getUrgencyClass = (level) => {
+        switch (level) {
+            case "NORMAL":
+                return "urgency-normal";
+
+            case "SOON":
+                return "urgency-soon";
+
+            case "URGENT":
+                return "urgency-urgent";
+
+            case "CRITICAL":
+                return "urgency-critical";
+
+            case "EXPIRED":
+                return "urgency-expired";
+
+            default:
+                return "";
+        }
+    };
 
 
     return (
@@ -347,6 +368,25 @@ function SmartMatches() {
                                                 </strong>{" "}
 
                                                 {food.status}
+                                            </p>
+                                            <p>
+                                                <strong>
+                                                    Urgency:
+                                                </strong>{" "}
+                                                <span
+                                                    className={getUrgencyClass(
+                                                        food.urgencyLevel
+                                                    )}
+                                                >
+                                                    {food.urgencyLabel}
+                                                </span>
+                                            </p>
+
+                                            <p>
+                                                <strong>
+                                                    Time Remaining:
+                                                </strong>{" "}
+                                                {food.minutesRemaining} minutes
                                             </p>
 
                                         </div>

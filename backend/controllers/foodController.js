@@ -1,62 +1,7 @@
-// const FoodListing = require("../models/FoodListing");
-
-// const createFood = async (req, res) => {
-//   try {
-//     const {
-//       foodName,
-//       foodType,
-//       quantity,
-//       unit,
-//       preparedAt,
-//       availableUntil,
-//       pickupLocation,
-//       description
-//     } = req.body;
-
-//     if (
-//       !foodName ||
-//       !foodType ||
-//       !quantity ||
-//       !unit ||
-//       !preparedAt ||
-//       !availableUntil ||
-//       !pickupLocation
-//     ) {
-//       return res.status(400).json({
-//         message: "Please fill all required fields"
-//       });
-//     }
-
-//     const food = await FoodListing.create({
-//       foodName,
-//       foodType,
-//       quantity,
-//       unit,
-//       preparedAt,
-//       availableUntil,
-//       pickupLocation,
-//       description,
-//       donor: req.user.id
-//     });
-
-//     res.status(201).json({
-//       message: "Food listing created successfully",
-//       food
-//     });
-
-//   } catch (error) {
-//     console.error("Create food error:", error);
-
-//     res.status(500).json({
-//       message: "Failed to create food listing"
-//     });
-//   }
-// };
-
-// module.exports = {
-//   createFood
-// };
 const FoodListing = require("../models/FoodListing");
+const {
+  calculateUrgency
+} = require("../utils/urgency");
 
 const createFood = async (req, res) => {
   try {
@@ -203,25 +148,67 @@ const updateFood = async (req, res) => {
 };
 const getAvailableFood = async (req, res) => {
   try {
+
+    // Automatically mark expired food
+    await FoodListing.updateMany(
+      {
+        status: "AVAILABLE",
+        availableUntil: {
+          $lte: new Date()
+        }
+      },
+      {
+        $set: {
+          status: "EXPIRED"
+        }
+      }
+    );
+
+    // Get only currently available food
     const foods = await FoodListing.find({
       status: "AVAILABLE"
     }).sort({ createdAt: -1 });
 
-    console.log("AVAILABLE FOOD COUNT:", foods.length);
-    console.log("AVAILABLE FOODS:", foods);
+    console.log(
+      "AVAILABLE FOOD COUNT:",
+      foods.length
+    );
 
-    res.status(200).json(foods);
+    const foodsWithUrgency = foods.map((food) => {
+      const urgency = calculateUrgency(
+        food.availableUntil
+      );
+
+      return {
+        ...food.toObject(),
+
+        urgencyLevel: urgency.level,
+        urgencyLabel: urgency.label,
+        minutesRemaining:
+          urgency.minutesRemaining
+      };
+    });
+
+    console.log(
+      "AVAILABLE FOODS:",
+      foodsWithUrgency
+    );
+
+    res.status(200).json(
+      foodsWithUrgency
+    );
 
   } catch (error) {
-    console.error("Get available food error:", error);
+    console.error(
+      "Get available food error:",
+      error
+    );
 
     res.status(500).json({
       message: "Failed to get available food"
     });
   }
 };
-
-
 module.exports = {
   createFood,
    getMyFoodListings,
