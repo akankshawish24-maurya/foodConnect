@@ -59,6 +59,8 @@ import AddFood from "./pages/donor/AddFood";
 import MyListings from "./pages/donor/MyListings";
 import DonorClaims from "./pages/donor/DonorClaims";
 import DonorPickups from "./pages/donor/DonorPickups";
+import DemandPrediction from "./pages/donor/DemandPrediction";
+import AddConsumptionData from "./pages/donor/AddConsumptionData";
 
 import DonorDashboard from "./pages/donor/DonorDashboard";
 import ReceiverDashboard from "./pages/ReceiverDashboard";
@@ -155,6 +157,14 @@ function App() {
         <Route
           path="/donor/pickups"
           element={<DonorPickups />}
+        />
+        <Route
+          path="/donor/demand-prediction"
+          element={<DemandPrediction />}
+        />
+        <Route
+          path="/donor/add-consumption"
+          element={<AddConsumptionData />}
         />
 
       </Routes>
