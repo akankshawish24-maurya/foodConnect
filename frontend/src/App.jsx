@@ -62,6 +62,10 @@ import AddFood from "./pages/AddFood";
 import MyListings from "./pages/MyListings";
 import EditFood from "./pages/EditFood";
 import AvailableFood from "./pages/AvailableFood";
+import AdminUsers from "./pages/AdminUsers";
+import AdminFood from "./pages/AdminFood";
+import AdminClaims from "./pages/AdminClaims";
+import AdminPickups from "./pages/AdminPickups";
 function App() {
   return (
     <BrowserRouter>
@@ -108,7 +112,22 @@ function App() {
           path="/receiver/available-food"
           element={<AvailableFood />}
         />
-        
+        <Route
+          path="/admin/users"
+          element={<AdminUsers />}
+        />
+        <Route
+          path="/admin/food"
+          element={<AdminFood />}
+        />
+        <Route
+          path="/admin/claims"
+          element={<AdminClaims />}
+        />
+        <Route
+          path="/admin/pickups"
+          element={<AdminPickups />}
+        />
 
       </Routes>
     </BrowserRouter>
