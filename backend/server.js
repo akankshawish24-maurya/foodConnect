@@ -68,7 +68,7 @@ const pickupRoutes = require("./routes/pickupRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 const demandRoutes = require("./routes/demandRoutes");
-
+const matchingRoutes = require("./routes/matchingRoutes");
 
 const app = express();
 app.use(cors());
@@ -85,6 +85,7 @@ app.use("/api/pickups", pickupRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/demand", demandRoutes);
+app.use("/api/matching", matchingRoutes);
 
 app.get("/", (req, res) => {
   res.send("FoodConnect Backend is Running!");

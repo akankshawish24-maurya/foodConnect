@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 
 function ReceiverDashboard() {
@@ -13,6 +14,15 @@ function ReceiverDashboard() {
         onClick={() => navigate("/receiver/available-food")}
       >
         View Available Food
+      </button>
+
+      <br />
+      <br />
+
+      <button
+        onClick={() => navigate("/receiver/smart-matches")}
+      >
+        Smart Food Matches
       </button>
     </div>
   );
