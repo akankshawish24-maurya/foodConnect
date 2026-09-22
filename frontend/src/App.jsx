@@ -50,16 +50,22 @@
 
 // export default App;
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Navbar from "./components/Navbar";
+import About from "./pages/About";
+import AddFood from "./pages/donor/AddFood";
+import MyListings from "./pages/donor/MyListings";
+import DonorClaims from "./pages/donor/DonorClaims";
+import DonorPickups from "./pages/donor/DonorPickups";
 
-import DonorDashboard from "./pages/DonorDashboard";
+import DonorDashboard from "./pages/donor/DonorDashboard";
 import ReceiverDashboard from "./pages/ReceiverDashboard";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import AddFood from "./pages/AddFood";
-import MyListings from "./pages/MyListings";
+// import AddFood from "./pages/AddFood";
+//import MyListings from "./pages/MyListings";
 import EditFood from "./pages/EditFood";
 import AvailableFood from "./pages/AvailableFood";
 import AdminUsers from "./pages/AdminUsers";
@@ -68,11 +74,13 @@ import AdminClaims from "./pages/AdminClaims";
 import AdminPickups from "./pages/AdminPickups";
 function App() {
   return (
+
     <BrowserRouter>
+      <Navbar />
       <Routes>
 
         {/* Public Routes */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -127,6 +135,26 @@ function App() {
         <Route
           path="/admin/pickups"
           element={<AdminPickups />}
+        />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/about"
+          element={<About />}
+        />
+        <Route
+          path="/donor/add-food"
+          element={<AddFood />}
+        />
+        <Route
+          path="/donor/claims"
+          element={<DonorClaims />}
+        />
+        <Route
+          path="/donor/pickups"
+          element={<DonorPickups />}
         />
 
       </Routes>

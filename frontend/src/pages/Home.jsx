@@ -1,42 +1,229 @@
+// function Home() {
+//   return (
+//     <main>
+//       <section>
+//         <h1>Reduce Food Waste. Feed Communities.</h1>
+
+//         <p>
+//           FoodConnect connects hostels, caterers and canteens
+//           with NGOs and volunteers to redistribute surplus food.
+//         </p>
+
+//         <button>Donate Food</button>
+//         <button>Find Food</button>
+//       </section>
+
+//       <section>
+//         <h2>How FoodConnect Works</h2>
+
+//         <div>
+//           <h3>1. Donate</h3>
+//           <p>Donors list their surplus food.</p>
+//         </div>
+
+//         <div>
+//           <h3>2. Connect</h3>
+//           <p>Receivers can find suitable available food.</p>
+//         </div>
+
+//         <div>
+//           <h3>3. Pickup</h3>
+//           <p>Volunteers help coordinate pickup and delivery.</p>
+//         </div>
+
+//         <div>
+//           <h3>4. Impact</h3>
+//           <p>Track food rescued and deliveries completed.</p>
+//         </div>
+//       </section>
+//     </main>
+//   );
+// }
+
+// export default Home;
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
-    <main>
-      <section>
-        <h1>Reduce Food Waste. Feed Communities.</h1>
+    <div>
 
-        <p>
-          FoodConnect connects hostels, caterers and canteens
-          with NGOs and volunteers to redistribute surplus food.
+      {/* Hero Section */}
+      <section className="hero-section">
+
+        <div className="hero-content">
+
+          <p className="hero-badge">
+            🍃 Together Against Food Waste
+          </p>
+
+          <h1>
+            Reduce Food Waste.
+            <br />
+            Share More. Help More.
+          </h1>
+
+          <p className="hero-description">
+            FoodConnect helps donors, receivers and volunteers
+            work together to rescue surplus food and deliver it
+            to people who need it.
+          </p>
+
+          <div className="hero-buttons">
+
+            <Link to="/register">
+              <button className="btn btn-primary">
+                Get Started
+              </button>
+            </Link>
+
+            <Link to="/about">
+              <button className="btn btn-secondary">
+                Learn More
+              </button>
+            </Link>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* How It Works */}
+      <section className="home-section">
+
+        <h2 className="section-title">
+          How FoodConnect Works
+        </h2>
+
+        <p className="section-subtitle">
+          A simple process that connects surplus food with people
+          and organizations who can use it.
         </p>
 
-        <button>Donate Food</button>
-        <button>Find Food</button>
+
+        <div className="steps-grid">
+
+          <div className="home-card">
+            <div className="home-icon">
+              🍱
+            </div>
+
+            <h3>
+              1. Post Food
+            </h3>
+
+            <p>
+              Donors post surplus food with quantity,
+              location and availability details.
+            </p>
+          </div>
+
+
+          <div className="home-card">
+            <div className="home-icon">
+              🤝
+            </div>
+
+            <h3>
+              2. Claim Food
+            </h3>
+
+            <p>
+              Receivers can discover available food
+              and submit a claim.
+            </p>
+          </div>
+
+
+          <div className="home-card">
+            <div className="home-icon">
+              🚚
+            </div>
+
+            <h3>
+              3. Pickup & Deliver
+            </h3>
+
+            <p>
+              Volunteers accept pickup requests and
+              help transport the food.
+            </p>
+          </div>
+
+
+          <div className="home-card">
+            <div className="home-icon">
+              🌱
+            </div>
+
+            <h3>
+              4. Reduce Waste
+            </h3>
+
+            <p>
+              Successful deliveries help keep surplus
+              food out of the waste stream.
+            </p>
+          </div>
+
+        </div>
+
       </section>
 
-      <section>
-        <h2>How FoodConnect Works</h2>
 
-        <div>
-          <h3>1. Donate</h3>
-          <p>Donors list their surplus food.</p>
+      {/* Impact Section */}
+      <section className="impact-section">
+
+        <h2>
+          Our Impact
+        </h2>
+
+        <div className="impact-grid">
+
+          <div>
+            <h3>🍽️</h3>
+            <strong>Meals Rescued</strong>
+            <p>Help reduce unnecessary food waste.</p>
+          </div>
+
+          <div>
+            <h3>🤝</h3>
+            <strong>Community</strong>
+            <p>Connect donors, receivers and volunteers.</p>
+          </div>
+
+          <div>
+            <h3>🌱</h3>
+            <strong>Sustainability</strong>
+            <p>Track meaningful redistribution activity.</p>
+          </div>
+
         </div>
 
-        <div>
-          <h3>2. Connect</h3>
-          <p>Receivers can find suitable available food.</p>
-        </div>
-
-        <div>
-          <h3>3. Pickup</h3>
-          <p>Volunteers help coordinate pickup and delivery.</p>
-        </div>
-
-        <div>
-          <h3>4. Impact</h3>
-          <p>Track food rescued and deliveries completed.</p>
-        </div>
       </section>
-    </main>
+
+
+      {/* Call to Action */}
+      <section className="cta-section">
+
+        <h2>
+          Have surplus food?
+        </h2>
+
+        <p>
+          Turn extra food into a meaningful contribution.
+        </p>
+
+        <Link to="/register">
+          <button className="btn btn-primary">
+            Join FoodConnect
+          </button>
+        </Link>
+
+      </section>
+
+    </div>
   );
 }
 

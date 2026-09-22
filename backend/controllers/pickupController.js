@@ -173,11 +173,42 @@ const getMyPickups = async (req, res) => {
     });
   }
 };
+// Get pickups for donor's food listings
+const getDonorPickups = async (req, res) => {
+  try {
+    // Find food listings created by this donor
+    const donorFoods = await FoodListing.find({
+      donor: req.user.id
+    }).select("_id");
+
+    const foodIds = donorFoods.map((food) => food._id);
+
+    // Find pickups for those food listings
+    const pickups = await Pickup.find({
+      food: { $in: foodIds }
+    })
+      .populate("food", "foodName foodType quantity unit pickupLocation status")
+      .populate("receiver", "name email")
+      .populate("volunteer", "name email")
+      .populate("claim")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(pickups);
+
+  } catch (error) {
+    console.error("Get donor pickups error:", error);
+
+    res.status(500).json({
+      message: "Failed to get donor pickups"
+    });
+  }
+};
 
 
 module.exports = {
   getAvailablePickups,
   acceptPickup,
   updatePickupStatus,
-  getMyPickups
+  getMyPickups,
+    getDonorPickups
 };

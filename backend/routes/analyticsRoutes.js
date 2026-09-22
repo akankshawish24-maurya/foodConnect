@@ -3,22 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  createClaim,
-   getDonorClaims
-} = require("../controllers/claimController");
+  getDonorAnalytics
+} = require("../controllers/analyticsController");
 
 const authMiddleware = require("../middleware/authMiddleware");
 
-router.post(
-  "/",
-  authMiddleware,
-  createClaim
-);
-
-
 router.get(
-  "/",
+  "/donor",
   authMiddleware,
-  getDonorClaims
+  getDonorAnalytics
 );
+
 module.exports = router;

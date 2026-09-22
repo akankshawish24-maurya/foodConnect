@@ -61,7 +61,35 @@ const createClaim = async (req, res) => {
     });
   }
 };
+const getDonorClaims = async (req, res) => {
+  try {
+    // Find food listings created by this donor
+    const donorFoods = await FoodListing.find({
+      donor: req.user.id
+    }).select("_id");
+
+    const foodIds = donorFoods.map((food) => food._id);
+
+    // Find claims made for those food listings
+    const claims = await Claim.find({
+      food: { $in: foodIds }
+    })
+      .populate("food", "foodName quantity unit pickupLocation")
+      .populate("receiver", "name email")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(claims);
+
+  } catch (error) {
+    console.error("Get donor claims error:", error);
+
+    res.status(500).json({
+      message: "Failed to get donor claims"
+    });
+  }
+};
 
 module.exports = {
-  createClaim
+  createClaim,
+   getDonorClaims
 };

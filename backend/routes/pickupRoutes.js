@@ -6,7 +6,8 @@ const {
   getAvailablePickups,
   acceptPickup,
   updatePickupStatus,
-  getMyPickups
+  getMyPickups,
+   getDonorPickups
 } = require("../controllers/pickupController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -27,6 +28,13 @@ router.get(
   getMyPickups
 );
 
+// Donor's pickups
+
+router.get(
+  "/donor",
+  authMiddleware,
+  getDonorPickups
+);
 
 // Accept pickup
 router.post(

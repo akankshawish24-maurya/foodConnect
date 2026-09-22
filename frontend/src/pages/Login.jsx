@@ -53,32 +53,87 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="auth-page">
 
-      <form onSubmit={handleSubmit}>
+      <div className="auth-card">
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {/* Logo */}
+        <div className="auth-logo">
+          🍃 FoodConnect
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* Heading */}
+        <h1 className="auth-title">
+          Welcome Back
+        </h1>
 
-        <button type="submit">
-          Login
-        </button>
+        <p className="auth-subtitle">
+          Login to your FoodConnect account
+        </p>
 
-      </form>
+        {/* Login Form */}
+        <form onSubmit={handleSubmit}>
 
-      <p>{message}</p>
+          {/* Email */}
+          <div className="form-group">
+
+            <label htmlFor="email">
+              Email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+          </div>
+
+
+          {/* Password */}
+          <div className="form-group">
+
+            <label htmlFor="password">
+              Password
+            </label>
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+          </div>
+
+
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="auth-button"
+          >
+            Login
+          </button>
+
+        </form>
+
+
+        {/* Register Link */}
+        <p className="auth-footer">
+          Don't have an account?{" "}
+
+          <a href="/register">
+            Register
+          </a>
+        </p>
+
+      </div>
+
     </div>
   );
 }
