@@ -24,6 +24,14 @@ function ReceiverDashboard() {
       >
         Smart Food Matches
       </button>
+      <br />
+      <br />
+
+      <button
+        onClick={() => navigate("/notifications")}
+      >
+        🔔 Notifications
+      </button>
     </div>
   );
 }

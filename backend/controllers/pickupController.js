@@ -1,7 +1,7 @@
 const Pickup = require("../models/Pickup");
 const FoodListing = require("../models/FoodListing");
 const Claim = require("../models/Claim");
-
+const Notification = require("../models/Notification");
 
 // Get all available pickups
 const getAvailablePickups = async (req, res) => {
@@ -46,6 +46,11 @@ const acceptPickup = async (req, res) => {
     pickup.status = "ASSIGNED";
 
     await pickup.save();
+    await Notification.create({
+      user: pickup.receiver,
+      message: "A volunteer has accepted your food pickup.",
+      type: "PICKUP"
+    });
 
     // Update food status
     await FoodListing.findByIdAndUpdate(
@@ -129,6 +134,11 @@ const updatePickupStatus = async (req, res) => {
           status: "COMPLETED"
         }
       );
+      await Notification.create({
+        user: pickup.receiver,
+        message: "Your food pickup has been completed successfully.",
+        type: "DELIVERY"
+      });
     }
 
     await FoodListing.findByIdAndUpdate(
@@ -210,5 +220,5 @@ module.exports = {
   acceptPickup,
   updatePickupStatus,
   getMyPickups,
-    getDonorPickups
+  getDonorPickups
 };

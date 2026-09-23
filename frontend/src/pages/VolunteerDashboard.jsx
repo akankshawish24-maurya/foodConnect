@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function VolunteerDashboard() {
   const [pickups, setPickups] = useState([]);
@@ -71,6 +72,20 @@ function VolunteerDashboard() {
       <p>
         Available Pickup Requests
       </p>
+
+      <Link to="/volunteer/pickups">
+        <button>
+          🚚 My Pickups
+        </button>
+      </Link>
+      <br />
+      <br />
+
+      <Link to="/notifications">
+        <button>
+          🔔 Notifications
+        </button>
+      </Link>
 
       {pickups.length === 0 ? (
         <p>No pickup requests available.</p>

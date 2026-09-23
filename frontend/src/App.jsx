@@ -11,6 +11,8 @@ import DonorPickups from "./pages/donor/DonorPickups";
 import DemandPrediction from "./pages/donor/DemandPrediction";
 import AddConsumptionData from "./pages/donor/AddConsumptionData";
 import SmartMatches from "./pages/receiver/SmartMatches";
+import Notifications from "./pages/Notifications";
+import VolunteerPickups from "./pages/VolunteerPickups";
 
 import DonorDashboard from "./pages/donor/DonorDashboard";
 import ReceiverDashboard from "./pages/ReceiverDashboard";
@@ -119,6 +121,14 @@ function App() {
         <Route
           path="/receiver/smart-matches"
           element={<SmartMatches />}
+        />
+        <Route
+          path="/volunteer/pickups"
+          element={<VolunteerPickups />}
+        />
+        <Route
+          path="/notifications"
+          element={<Notifications />}
         />
 
       </Routes>

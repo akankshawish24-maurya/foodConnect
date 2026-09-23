@@ -1,6 +1,7 @@
 const Claim = require("../models/Claim");
 const FoodListing = require("../models/FoodListing");
 const Pickup = require("../models/Pickup");
+const Notification = require("../models/Notification");
 
 const createClaim = async (req, res) => {
   try {
@@ -44,9 +45,21 @@ const createClaim = async (req, res) => {
       claim: claim._id,
       food: foodId,
       receiver: req.user.id,
-        status: "AVAILABLE"
+      status: "AVAILABLE"
+    });
+    // await Notification.create({
+    //   user: food.donor,
+    //   message: `Your food listing "${food.foodName}" has been claimed.`,
+    //   type: "CLAIM"
+    // });
+    const notification = await Notification.create({
+      user: food.donor,
+      message: `Your food listing "${food.foodName}" has been claimed.`,
+      type: "CLAIM"
     });
 
+    console.log("DONOR ID:", food.donor);
+    console.log("NOTIFICATION CREATED:", notification);
     res.status(201).json({
       message: "Food claimed successfully",
       claim,
@@ -91,5 +104,5 @@ const getDonorClaims = async (req, res) => {
 
 module.exports = {
   createClaim,
-   getDonorClaims
+  getDonorClaims
 };
